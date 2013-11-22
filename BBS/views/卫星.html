@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>地图</title>
+    <script type="text/javascript">
+        function initialize(x,y) {
+            //alert( (x));
+            var mp = new BMap.Map('map');
+            mp.centerAndZoom(new BMap.Point(x, y), 11);
+            var marker1 = new BMap.Marker(new BMap.Point(x, y));  // 创建标注
+            mp.addOverlay(marker1);              // 将标注添加到地图中
+            mp.enableScrollWheelZoom();                            //启用滚轮放大缩小
+
+        }
+        function show_weixing(x,y){
+
+            var map = new BMap.Map("map",{mapType: BMAP_HYBRID_MAP});      //设置卫星图为底图
+            var point = new BMap.Point(x,y);
+            map.centerAndZoom(point,17);
+            var marker1 = new BMap.Marker(new BMap.Point(x, y));  // 创建标注
+            map.addOverlay(marker1);              // 将标注添加到地图中
+            map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+        }
+
+        function loadScript() {
+            var script = document.createElement("script");
+            script.src = "http://api.map.baidu.com/api?v=1.5&ak=D67e8cf6232fbb8735f29ac8345b1795&callback=initialize";//此为v1.5版本的引用方式
+            // http://api.map.baidu.com/api?v=1.5&ak=您的密钥&callback=initialize"; //此为v1.4版本及以前版本的引用方式
+            document.body.appendChild(script);
+        }
+        window.onload = loadScript;
+        function putong(){
+            //loadScript();
+            var x = document.getElementById("x").value;
+            var y = document.getElementById("y").value;
+            x =parseFloat(x);
+            y= parseFloat(y);
+            initialize(x,y);
+
+        }
+        function weixing(){
+            var x = document.getElementById("x").value;
+            var y = document.getElementById("y").value;
+            x =parseFloat(x);
+            y= parseFloat(y);
+            show_weixing(x,y);
+
+
+        }
+
+
+    </script>
+</head>
+<body>
+<div style="padding-top: 4px">
+        <input type="text" id="x" value="118.232998"/>
+        <input type="text" id="y" value="24.727993"/>
+</div>
+<div style="padding-top: 40px">
+    <input type="button" value="卫星图" id="wei" onclick="weixing()"/>
+    <input type="button" value="普通图" id="pu" onclick="putong()"/>
+</div>
+
+<div id="map" style="width:700px;height:320px"></div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<%- include header.html %>
+<div id="wrapper">
+    <div id="main">
+        <div id="sidebar">
+            <div class="panel">
+                <div class="header">
+                    <span class="col_fade">作者</span>
+                </div>
+                <div class="inner">
+                    <div class="user_card">
+                        <div>
+                            <a class='user_avatar' href="/user/<%=createname%>">
+                                <img src="/images/logo/<%=createname%>.png" title=<%=createname%>>
+                            </a>
+                            <span class='user_name'><a class='dark'
+                                                       href="/user/<%=createname%>"><%=createname%></a></span>
+                        </div>
+                        <div class="clearfix">
+                            <div class="floor">
+                            <span class="big">
+                                <%=points%>
+                            </span>
+                                积分
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel">
+                <div class="header">
+                    <span class="col_fade">友情链接</span>
+                </div>
+                <div class="inner">
+                    <ul class="unstyled">
+                        <%for(var i=0; i< links.length;i++){%>
+                        <li><a target="_blank" href="<%=links[i].url%>"><%=links[i].name%></a></li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            <div class='panel'>
+                <div class='header'>
+                    <ul class="breadcrumb">
+                        <li><a href='/'>主页</a><span class='divider'>/</span></li>
+                        <li class='active'>话题详情</li>
+                    </ul>
+                </div>
+                <div class="inner topic" id="topic_id" topic_id=<%=uri%> >
+
+                    <h3>
+                        <%=title%>
+                    </h3>
+                    <hr>
+                    <div class='topic_content'>
+                        <div class="markdown-text"><p> <%=content%></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <span class="col_fade"><p> <%=createname%> 在 <%=createdate%> 发布</p></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class='sep10'></div>
+            <div class='panel'>
+                <div class='header'>
+                    <%if(user){%>
+                    <span class='col_fade'><%=replys.length%> 回复</span>
+                    <%}%>
+                </div>
+                <% for(var i=0; i< replys.length;i++){ %>
+                <div class='cell reply_area reply_item' id="<%=replys[i]._id%>" >
+                    <div class='author_content' id="_<%=i%>">
+                        <div class="user_info"  >
+                        <span class="reply_author">
+                             <div class='user_avatar block'>
+                                 <a href="/user/<%=replys[i].reply_name%>">
+                                     <img src="/images/logo/<%=replys[i].reply_name%>.png" />
+                                 </a>
+
+                             </div>
+                            <div class="user_info" >
+                                <span class="reply_author">
+                                    <a class="dark" href="/user/<%=replys[i].reply_name%>"><%=replys[i].reply_name%> </a>
+                                </span>
+                                  <span class="col_fade">
+                              <a><%=replys[i].reply_time%> </a>
+                        </span>
+                            </div>
+                        </span>
+
+                        </div>
+                        <div class='user_action fr' id="<%=replys[i]._id%>+2">
+                            <span class="col_fade" >#<%=i+1%></span>
+                            <%if(user){%>
+                            <span><a href="javascript:void(0)" class="dark reply2_btn" id=<%=i%> onclick="comment_1(this)">回复</a></span>
+                            <%}%>
+                        </div>
+
+                    </div>
+                    <div class='reply_content' >
+
+                        <p><%=replys[i].relpy_content%></p>
+                    </div>
+                    <div class='clearfix'>
+                        <div class='reply2_area' id="_<%=replys[i]._id%>"  >
+                            <% for(var j =0;j< replys[i].comment.length;j++){%>
+
+                            <div class="cell reply2_item" id="<%=replys[i].comment[j].reply_id_%>">
+                                <div class='author_content'>
+                                    <div class="user_avatar block">
+                                        <a href="/user/<%=replys[i].comment[j].reply_name%>">
+                                            <img src="/images/logo/<%=replys[i].comment[j].reply_name%>.png"
+                                                 title="<%=replys[i].comment[j].reply_name%>">
+                                        </a>
+                                    </div>
+                                    <div class="user_info"  >
+                                         <span class="reply_author">
+                                             <a  class="dark" href="/user/<%=replys[i].comment[j].reply_name%>"><%=replys[i].comment[j].reply_name%></a></span>
+                                         <span class="col_fade">
+                              <a><%=replys[i].comment[j].reply_time%> </a>
+                        </span>
+                                    </div>
+                                    <div class='user_action fr'>
+                                        <%if(user){%>
+                                        <span><a href="javascript:void(0)" class="dark reply2_btn"
+                                                 onclick="comment_2(this)">回复</a>
+                                        </span>
+                                        <%}%>
+                                    </div>
+                                </div>
+                                <div class="reply_content">
+                                    <p>
+                                        @
+                                        <a class="dark" href="/user/<%=replys[i].comment[j].name%>">
+                                            <%=replys[i].comment[j].name%>
+                                        </a></span>
+
+                                        <%=replys[i].comment[j].content%>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <%}%>
+
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+            </div>
+            <%if(user){%>
+            <div class='panel'>
+                <div class='header'>
+                    <span class='col_fade'>添加回复</span>
+                </div>
+                <div class='inner reply'>
+
+
+                    <form class='reply_form' class="form-horizontal" action='/topic/reply?uri=<%=uri%>' method='post'>
+
+                        <div class='tab-content'>
+                            <input type="hidden" value="<%=createname%>" name="create_name"id="create_name">
+                            <input type="hidden" value="<%=title%>" name="title"id="title">
+                            <div class='tab-pane active' id='markdown'>
+                                <textarea class='span8' id='r_content' name='r_content' rows='8'
+                                          style="width: 98%"></textarea>
+                            </div>
+
+                        </div>
+                        <button type="submit" id='submit_btn' class='btn'>回复</button>
+                    </form>
+                </div>
+            </div>
+            <%}%>
+
+        </div>
+    </div>
+</div>
+
+<%- include footer.html %>

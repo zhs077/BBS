@@ -1,0 +1,82 @@
+<%- include header.html%>
+
+<div class="container">
+
+    <div id="sidebar">
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">话题发布步骤</span>
+            </div>
+            <div class="inner">
+                <ol>
+                    <li>填写标题</li>
+                    <li>填写内容</li>
+                    <li>选择话题标签</li>
+                    <li>确认后发布话题</li>
+                </ol>
+            </div>
+
+        </div>
+
+        <div class='panel'>
+            <div class='header'>
+                <span class='col_fade'>话题发布指南</span>
+            </div>
+            <div class='inner'>
+                <ol>
+                    <li>尽量把话题要点浓缩到标题里</li>
+                    <li>内容对标题做进一步说明，但不是必须的</li>
+                    <li>给话题选择合适的标签能增加被阅读的机会</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class='panel'>
+            <div class="header">
+                <div class="breadcrumb">
+                    <li><a href='/'>主页</a><span class='divider'>/</span></li>
+                    <li class='active'>话题发布</li>
+
+                </div>
+
+            </div>
+
+            <div class="inner">
+                <form enctype="multipart/form-data" class="form-horizontal "
+                      action="/topic/create" method="post">
+                    <%-message%>
+                    <div class="" style=" padding-left: 10px;padding-top: 10px">
+                        <label class='bold' for='title'>标题</label>
+                        <div>
+                            <!--span8用来控制宽度-->
+                            <textarea class='span8' id='title' name='title' rows='1'
+                                      placeholder="请在此输入标题，字数控制在10到100个之间"
+                                      style="resize: none;height: 30px"></textarea>
+                        </div>
+                    </div>
+                    <div class='sep10'></div>
+                    <div>
+                        <label class='bold' for='title' style="padding-left: 10px;">内容</label>
+
+                        <div style=" padding-left: 10px;">
+                            <textarea class='span8' id='wmd-input' name='t_content' rows='6'
+                                      style="resize: none;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions" style="border: none;padding-left: 10px;">
+                        <button type="submit" class="btn btn-primary" id="submit_btn">发布</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<%- include footer.html%>

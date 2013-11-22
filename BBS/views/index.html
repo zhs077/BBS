@@ -1,0 +1,142 @@
+<%- include header.html %>
+<div id="wrapper">
+    <div id="main">
+        <div id="sidebar">
+            <div class="panel">
+                <% if(user != null){%>
+                <div class="header">
+                    <span class="col_fade">个人信息</span>
+                </div>
+                <div class="inner">
+                    <div class="user_card">
+                        <a class='user_avatar' href="/user/<%=user.name%>">
+                            <img src="/images/logo/<%=user.picture_name%>" title=<%=user.name%> />
+                        </a>
+                        <span class='user_name'><a class='dark' href="/user/<%=user.name%>"><%=user.name%></a></span>
+                    </div>
+                    <div class="clearfix">
+                        <div class="floor">
+                            <span class="big">
+                                <%=user.points%>
+                            </span>
+                            积分
+                        </div>
+                    </div>
+                </div>
+                <%} else{%>
+                <div class="inner">
+                    <p>欢迎来到无聊的论坛</p>
+
+                    <div>
+                        <a href='/reg'>
+                            <button class='btn'>现在注册</button>
+                        </a>
+                        <span>已注册用户请<a class='light' href='/login'> 登录</a></span>
+                    </div>
+                </div>
+                <%}%>
+            </div>
+            <div class="panel">
+                <div class="header">
+                    <span class="col_fade">友情链接</span>
+                </div>
+                <div class="inner">
+                    <ul class="unstyled">
+                        <%for(var i=0; i< links.length;i++){%>
+                        <li><a target="_blank" href="<%=links[i].url%>"><%=links[i].name%></a></li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            <div class='panel'>
+                <div class='inner'>
+                    <div class="header">
+                        <div class="breadcrumb">
+                            <span class="col_fade">当前话题</span>
+                            <% if(user){%>
+                            <a href='/topic/create' class="fr">
+                                <button class='btn btn-success fr' id='create_topic_btn'>发布话题</button>
+                            </a>
+                            <%}%>
+                        </div>
+                    </div>
+
+                    <div id="topic_list">
+                        <% for(var i=0;i< pagesize;i++){ %>
+                        <div class="cell">
+                            <div class='user_avatar block'>
+                                <img src="/images/logo/<%=posts[i].name%>.png" title=<%=posts[i].name%> />
+                                <!--<p style="text-align: center;"><%= posts[i].name%> </p>-->
+                            </div>
+                            <div class="block count">
+                                <a title="回复数"><%=posts[i].reply_count%></a>
+                                /
+                                <span title="点击数"><%=posts[i].click_count%></span>
+
+                            </div>
+                            <div class='topic_wrap' style="padding-left: 8px;">
+
+
+                                <a href='/topic/show?id=<%=posts[i].uri%>'>
+                                    <%= posts[i].title%>
+                                </a>
+                            </div>
+                            <div class='last_time'><%= posts[i].createdate %></div>
+
+
+                        </div>
+                        <%}%>
+                    </div>
+                </div>
+                <div class='pagination' current_page='1'>
+                    <ul>
+                        <% if(page == 1) {%>
+                        <li class='disabled'><a>«</a></li>
+                        <%} else {%>
+                        <li><a href='/topic/index?page=1'>«</a></li>
+                        <%}%>
+
+                        <% if(page -3 >0) { %>
+                        <li><a href='/topic/index?page= <%=page-3 %>'> <%=page-3 %></a></li>
+                        <% }%>
+                        <% if(page -2 >0) { %>
+                        <li><a href='/topic/index?page= <%=page-2 %>'> <%=page-2 %></a></li>
+                        <% }%>
+                        <% if(page -1 >0) { %>
+                        <li><a href='/topic/index?page= <%=page-1 %>'> <%=page-1 %></a></li>
+                        <% }%>
+                        <li class='disabled'><a><%=page%></a></li>
+
+                        <% if(page +1 < max_page) { %>
+                        <li><a href='/topic/index?page= <%=page+1 %>'> <%=page+1 %></a></li>
+                        <% }%>
+                        <% if(page +2 < max_page) { %>
+                        <li><a href='/topic/index?page= <%=page+2 %>'> <%=page+2 %></a></li>
+                        <% }%>
+                        <% if(page +3 < max_page) { %>
+                        <li><a href='/topic/index?page= <%=page+3 %>'> <%=page+3 %></a></li>
+                        <% }%>
+                        <% if(page +4 < max_page) { %>
+                        <li><a href='/topic/index?page= <%=page+4 %>'> <%=page+4 %></a></li>
+                        <% }%>
+                        <% if(page +5 < max_page) { %>
+                        <li><a>...</a></li>
+                        <% }%>
+                        <% if(page == max_page){%>
+                        <li class='disabled'><a>»</a></li>
+                        <% } else {%>
+                        <li><a href='/topic/index?page=<%=max_page %>'>»</a></li>
+                        <%}%>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<%- include footer.html %>
+

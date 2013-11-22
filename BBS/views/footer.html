@@ -1,0 +1,38 @@
+<div id='footer'>
+    <div id='footer_main'>
+        <div class='col_fade'>
+            &copy; 2013 <br>本社区为开源系统，版本: 0.0.1 ，欢迎贡献代码<br>
+        </div>
+    </div>
+</div>
+<p id="back-to-top"><a href="#top"><span></span>返回顶部</a></p>
+<script>
+    $(function () {
+        //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+        $(function () {
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 100) {
+                    $("#back-to-top").fadeIn(1500);
+                }
+                else {
+                    $("#back-to-top").fadeOut(1500);
+                }
+            });
+
+            //当点击跳转链接后，回到页面顶部位置
+
+            $("#back-to-top").click(function () {
+                $('body,html').animate({scrollTop: 0}, 100);
+                return false;
+            });
+
+//            $("#back-to-top").click(function () {
+//                $('body,html').animate({scrollTop: 0}, 100);
+//                return false;
+//            });
+        });
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<%- include header.html %>
+
+<div id="wrapper">
+    <div id="main">
+
+    <div id="sidebar">
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">个人信息</span>
+            </div>
+            <div class="inner">
+                <div class="user_card">
+                    <a  class='user_avatar'  href="/user/<%=user.name%>">
+                        <img src="/images/logo/<%=user.picture_name%>" title=<%=user.name%> />
+                    </a>
+                    <span class='user_name'><a class='dark' href="/user/<%=user.name%>"><%=user.name%></a></span>
+                </div>
+                <div class="clearfix">
+                    <div class="floor">
+                            <span class="big">
+                                <%=user.points%>
+                            </span>
+                        积分
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">友情链接</span>
+            </div>
+            <div class="inner">
+                <ul class="unstyled">
+                    <%for(var i=0; i< links.length;i++){%>
+                    <li><a target="_blank" href="<%=links[i].url%>"><%=links[i].name%></a></li>
+                    <%}%>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <div class='panel'>
+            <div class="header">
+                <div class="breadcrumb">
+                    <li><a href='/'>主页</a><span class='divider'>/</span></li>
+                    <li class='active'>用户设置</li>
+
+                </div>
+
+            </div>
+
+            <div class="inner post">
+                <%-message%>
+                <form enctype="multipart/form-data" class='form-horizontal' action='/user/setting' method='post'>
+                    <div class="control-group">
+                        <label class='control-label' >用户名</label>
+                        <div class='controls'>
+                            <input class='input-xlarge readonly' id='name' name='name' size='30' type='text'
+                                   readonly='true' value=<%=user.name%> />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class='control-label'>邮箱</label>
+                        <div class='controls'>
+                            <input class='input-xlarge readonly' id='email' name='email' size='30' type='text'
+                                   readonly='true' value=<%=user.email%> />
+                        </div>
+                    </div>
+                    <div class='control-group'>
+                        <label class='control-label'>所在地址</label>
+
+                        <div class='controls'>
+                            <input class='input-xlarge' id='address' name='address' size='30' type='text' value=<%=user.address%>>
+
+                        </div>
+                    </div>
+                    <div class='control-group'>
+                        <label class='control-label' >个性签名</label>
+
+                        <div class='controls'>
+                            <input class='input-xlarge' id='sign' name='sign' size='30' type='text'                             value=<%=user.sign%>>
+
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">邮件提醒</label>
+                        <div class="controls">
+                            <label class="checkbox">我的话题收到回复时
+                                <%if(user.receive_at_mail == 1){%>
+                                <input type="checkbox" checked="checked"name="receive_at_mail"id="receive_at_mail">
+                                <%}else{%>
+                                <input type="checkbox" name="receive_at_mail"id="receive_at_mail">
+                                <%}%>
+
+                            </label>
+                        </div>
+                    </div>
+                    <div class='form-actions'>
+                        <input type='submit' class='btn' value='保存设置'/>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="panel">
+                <div class="header">
+                    <span class="col_fade">更改头像</span>
+                </div>
+                <div class="inner">
+                    <form method="post" class="form-horizontal" enctype="multipart/form-data" action="/user/pic-upload">
+                        <div class="control-group">
+
+                            <div class='controls'>
+                                <p class="help-block">仅支持PNG格式</p>
+                                <input  type="file" name="pic" accept="image/png" >
+                            </div>
+                        </div>
+                        <div class='form-actions'>
+                            <input type='submit' class='btn ' value='保存头像'/>
+                        </div>
+
+                    </form>
+                    <!--<hr>-->
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">修改密码</span>
+            </div>
+            <div class="inner">
+
+                <form id='setting_form' enctype="multipart/form-data"class='form-horizontal' action='/user/pass_update' method='post'>
+
+                    <div class="control-group">
+                        <label class="control-label" for="old_pass">当前密码</label>
+                        <div class="controls">
+                            <input class='input-xlarge' type='password' id='old_pass' name='old_pass' size='30'/>
+                        </div>
+                    </div>
+                    <div class='control-group'>
+                        <label class='control-label' for='new_pass'>新密码</label>
+
+                        <div class='controls'>
+                            <input class='input-xlarge' type='password' id='new_pass' name='new_pass' size='30'/>
+                        </div>
+                    </div>
+                    <div class='form-actions'>
+                        <input type='submit' class='btn' value='更改密码'/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<%- include footer.html %>

@@ -1,0 +1,128 @@
+<%- include header.html%>
+<div id="wrapper">
+    <div id="main">
+        <div id="sidebar">
+            <div class="panel">
+                <div class="header">
+                    <span class="col_fade">个人信息</span>
+                </div>
+                <div class="inner">
+                    <div>
+                        <a class='user_avatar' href="/user/<%=user.name%>">
+                            <img src="/images/logo/<%=user.name%>.png" title=<%=user.name%> />
+                        </a>
+                  <span class="user_name">
+                   <a class="dark" href="/user/<%=user.name%>"> <%=user.name%> </a>
+                </span>
+                    </div>
+
+                    <div class="clearfix">
+                        <div class="floor">
+                            <span class="big">
+                                <%=user.points%>
+                            </span>
+                            积分
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="header">
+                    <span class="col_fade">友情链接</span>
+                </div>
+                <div class="inner">
+                    <ul class="unstyled">
+                        <%for(var i=0; i< links.length;i++){%>
+                        <li><a target="_blank" href="<%=links[i].url%>"><%=links[i].name%></a></li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+        <div id='content'>
+            <div class='panel'>
+                <div class='header'>
+                    <ul class='breadcrumb'>
+                        <li><a href='/'>主页</a><span class='divider'>/</span></li>
+                        <li class='active'><%=user.name%></li>
+                    </ul>
+                </div>
+                <div class='inner userinfo'>
+                    <div class='user_big_avatar'>
+                        <img src="/images/logo/<%=user.name%>.png" class="user_avatar" title=<%=user.name%> />
+                    </div>
+                    <a class='dark'><%=user.name%></a>
+
+                    <!--<div class='col_fade'>-->
+                    <!--<span>-->
+                    <!--<img src="http://cnodejs.qiniudn.com/public/images/cert_icon&16.png" />-->
+                    <!--0 关注-->
+                    <!--0 粉丝-->
+                    <!--0 积分</span>-->
+
+                    <!--</div>-->
+                    <!--<div class='user_profile'>-->
+                    <!--<ul class='unstyled'>-->
+
+
+                    <!--</ul>-->
+
+                    <!--</div>-->
+                    <p class='col_fade'>于 <%=user.join_time%>加入论坛</p>
+
+                </div>
+
+            </div>
+
+            <div class="panel">
+                <div class="header">
+
+                    <span class="col_fade">最近发布话题</span>
+                </div>
+                <div class="inner">
+                    <%if(topics.length == 0){%>
+                    <p>无话题</p>
+                    <%}%>
+                    <% for(var i=0;i< topics.length;i++){ %>
+                    <div class="cell">
+                        <div class='user_avatar block'>
+                            <img src="/images/logo/<%=user.name%>.png" title=<%=user.name%> />
+                        </div>
+                        <div class="block count">
+                            <a title="回复数"><%=topics[i].reply_count%></a>
+                            /
+                            <span title="点击数"><%=topics[i].click_count%></span>
+
+                        </div>
+                        <div class='topic_wrap' style="padding-left: 8px;">
+                            <!---->
+                            <a href='/topic/show?id=<%=topics[i].uri%>'>
+                                <%= topics[i].title%>
+                            </a>
+                        </div>
+                        <div class='last_time'><%= topics[i].createdate %></div>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+
+            <!--<div class="panel">-->
+                <!--<div class="header">-->
+                    <!--<span class="col_fade">最近参与话题</span>-->
+                <!--</div>-->
+                <!--<div class="inner">-->
+                <!--</div>-->
+            <!--</div>-->
+
+        </div>
+    </div>
+</div>
+
+
+<%- include footer.html%>
+
+
+
+
