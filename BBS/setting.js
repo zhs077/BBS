@@ -19,8 +19,8 @@ module.exports = {
     ,mail:{
         host: "smtp.qq.com",
         auth: {
-            user: "436062598@qq.com",
-            pass: "zhs2008810077"
+            user: "xx@qq.com",
+            pass: "xx"
         },
         port: 465 // smtp server port
         , domains: ["qq.com"], secureConnection: true
